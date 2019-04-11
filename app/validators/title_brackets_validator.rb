@@ -37,13 +37,14 @@ class TitleBracketsValidator < ActiveModel::Validator
   end
 
   def closes?(opener, closer)
-    return true if check_opener_and_closer "(", ")", opener, closer
-    return true if check_opener_and_closer "[", "]", opener, closer
-    return true if check_opener_and_closer "{", "}", opener, closer
-    false
+    @opener = opener
+    @closer = closer
+    return true if check_opener_and_closer("(", ")") ||
+        check_opener_and_closer("[", "]") ||
+        check_opener_and_closer("{", "}")
   end
 
-  def check_opener_and_closer(bracket1, bracket2, opener, closer)
-    return true if opener == bracket1 && closer == bracket2
+  def check_opener_and_closer(bracket1, bracket2)
+    return true if @opener == bracket1 && @closer == bracket2
   end
 end
