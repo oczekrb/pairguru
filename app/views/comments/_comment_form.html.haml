@@ -1,0 +1,8 @@
+.comment-form{ style: "border-top: 1px solid; padding-top: 10px;" }
+  = form_for [@movie, @movie.comments.build], class: "form-group" do |f|
+    = f.hidden_field :user_id, value: current_user.id
+
+    = f.label "Juts leave a comment!"
+    = f.text_area :content, class: "form-control", placeholder: "Here you can type something about movie..."
+    %br
+    = f.submit "Submit", class: "btn btn-default pull-right"
