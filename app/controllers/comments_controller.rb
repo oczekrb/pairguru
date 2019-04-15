@@ -16,12 +16,8 @@ class CommentsController < ApplicationController
   def destroy
     @comment = @movie.comments.find(params[:id])
     redirect_to movie_path(@movie) if @comment.user != current_user
-    if @comment.destroy
-      flash[:notice] = "Comment was succeffully deleted."
-      redirect_to movie_path(@movie)
-    else
-      redirect_to movie_path(@movie)
-    end
+    flash[:notice] = "Comment was succeffully deleted." if @comment.destroy
+    redirect_to movie_path(@movie)
   end
 
   private
