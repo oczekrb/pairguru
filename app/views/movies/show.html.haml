@@ -1,5 +1,20 @@
 %h1= @movie.title
 .jumbotron
   = @movie.description
+
+- @movie.comments.each do |comment|
+  .panel.panel-default
+    .panel-body
+      = comment.content
+    .panel-footer{ style: "height: 50px; font-size: 12px;"}
+      Created at: #{comment.created_at.strftime("%B %d, %Y")}
+      - if current_user == comment.user
+        = link_to "Delete your comment", movie_comment_path(@movie, comment), data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-default pull-right', method: :delete
+      %br
+      Created by: #{comment.user.name}
+
+
 - if user_signed_in?
   %p= link_to 'Email me details about this movie', send_info_movie_path(@movie), class: 'btn btn-sm btn-default'
+
+  = render "comments/comment_form"
