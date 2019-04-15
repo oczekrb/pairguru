@@ -1,0 +1,17 @@
+.row
+.col-md-8.col-md-offset-2.col-lg-8.col-lg-offset-2
+  %h1.text-center Top 10 users
+  %table.table.table-striped
+    %thead
+      %tr
+        %th #
+        %th Name
+        %th Number of comments
+        %th Joined at
+    %tbody
+      - @top_ten.each_with_index do |user, i|
+        %tr
+          %td= i + 1
+          %td= user.name
+          %td= user.comments.count
+          %td= user.created_at.strftime("%B %d, %Y")
