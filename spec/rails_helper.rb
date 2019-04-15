@@ -7,6 +7,7 @@ require "pry"
 require "capybara/rails"
 require "simplecov"
 require "shoulda/matchers"
+require "devise"
 SimpleCov.start "rails"
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -30,6 +31,8 @@ SimpleCov.start "rails"
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+  config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Devise::Test::ControllerHelpers, type: :controller
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.include FactoryBot::Syntax::Methods
