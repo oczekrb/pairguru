@@ -1,4 +1,12 @@
 .row
   .col-md-8.col-md-offset-2.col-lg-8.col-lg-offset-2
+    Sort_by:
+    = link_to "A..Z", movies_path(case: "asc")
+    |
+    = link_to "Z..A", movies_path(case: "desc")
+    |
+    = link_to "Newest", movies_path(case: "newest")
+    |
+    = link_to "Oldest", movies_path(case: "oldest")
     %h1.text-center Movies
     = render 'movies_table', movies: @movies
